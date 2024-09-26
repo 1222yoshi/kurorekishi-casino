@@ -2,6 +2,9 @@
   <div class="flex flex-col">
     <%= link_to 'カジノで遊ぶ', trump_index_path, class: "text-2xl mb-16 text-center text-yellow-400" %>
     <%= link_to '交換所', boards_path, class: "text-2xl text-center text-yellow-400 mb-16" %>
-    <%= link_to 'ギャンブルスキル', skills_path, class: "text-2xl text-center text-yellow-400" %>
+    <%= link_to 'ギャンブルスキル', skills_path, class: "text-2xl text-center text-yellow-400 mb-16" %>
+    <% !current_user || if current_user.equipped.any? { |equipped_skill| equipped_skill.name == "V.I.P" } %>
+      <%= link_to 'V.I.Pを自慢する', share_hone_path(status: 'vip'), class: "text-2xl text-center text-yellow-400", target: "_blank", rel: "noopener noreferrer"  %>
+    <% end %>
   </div>
 </div>
