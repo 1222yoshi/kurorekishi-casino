@@ -1,14 +1,9 @@
 <header class="fixed w-full">
-  <div class="bg-red-700 text-white h-20 flex items-center w-full">
-    <div class="flex-1 text-center text-2xl text-black">
+  <div class="bg-red-700 text-white h-20 flex items-center w-full justify-between">
+    <div class="flex justisy-start text-center text-2xl text-black ml-4">
       <%= link_to '黒歴史カジノ', root_path %>
     </div>
-    <% if current_user %>
-      <div class="flex-1 text-center">
-        所持コイン<%= current_user.coin %>枚
-      </div>
-    <% end%>
-    <div class="flex-1 text-center">
+    <div class="justisy-end text-center mr-4">
       <% if current_user %>
         <%= link_to 'チェックアウト', logout_path, data: { turbo_method: :delete } %>
       <% else %>
