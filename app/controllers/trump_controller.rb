@@ -45,16 +45,27 @@ class TrumpController < ApplicationController
   # セッションにカードが保存されていない場合にのみ新しいカードを引く
     if session[:visible_card].nil? || session[:hidden_cards].nil?
       if current_user.equipped.any? { |equipped_skill| equipped_skill.name == "V.I.P" } 
-        session[:hidden_cards] ||= []
-        while session[:hidden_cards].length < 4
-          response = HTTParty.get("https://deckofcardsapi.com/api/deck/#{@deck_id}/draw/?count=1")
-          card = response.parsed_response['cards'].first
+      session[:hidden_cards] ||= []
+      loop do
+        response = HTTParty.get("https://deckofcardsapi.com/api/deck/#{@deck_id}/draw/?count=1")
+        card = response.parsed_response['cards'].first
+        if card_value(card) == 14
+          session[:hidden_cards] << card # Aならhidden_cardsに入れる
+        else
+          session[:visible_card] = card # A以外ならvisible_cardに設定
+          break
+        end
+      end
+      while session[:hidden_cards].length < 4
+        remaining_count = 4 - session[:hidden_cards].length
+        response = HTTParty.get("https://deckofcardsapi.com/api/deck/#{@deck_id}/draw/?count=#{remaining_count}")
+        drawn_cards = response.parsed_response['cards']
+        drawn_cards.each do |card|
           if card_value(card) == 14
             session[:hidden_cards] << card
           end
         end
-        response = HTTParty.get("https://deckofcardsapi.com/api/deck/#{@deck_id}/draw/?count=1")
-        session[:visible_card] = response.parsed_response['cards'].first
+      end
       else
         response = HTTParty.get("https://deckofcardsapi.com/api/deck/#{@deck_id}/draw/?count=1")
         session[:visible_card] = response.parsed_response['cards'].first
