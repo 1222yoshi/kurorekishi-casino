@@ -1,0 +1,30 @@
+<div class="flex flex-col items-center justify-center h-screen left-1/2 right-1/2 text-xl">
+  <div class="bg-black text-center text-white">
+    <% if current_user == @board.user %>
+      <div class="mb-8 mt-4 text-emerald-700">
+        <%= @board.user.name %>様
+      </div>
+    <% else %>
+      <div class="mb-8 mt-4">
+        <%= @board.user.name %>様
+      </div>
+    <% end %>
+    <div class="mb-8">
+      黒歴史の種類:<%= @board.title %>
+    </div>
+    <div class="mb-8">
+      必要コイン：<%= @board.price * 2%>枚
+    </div>
+    <div class="mb-16">
+      <%= @board.body %>
+    </div>
+    <% if current_user == @board.user %>
+      <div class="mb-4">
+        <%= button_to "コイン#{@board.price * 2}枚を消費して買い戻す（削除）", board_path(@board), method: :delete, class: "text-red-600"%>
+      </div>
+    <% end %>
+  </div>
+  <div class="text-yellow-400 mt-8">
+    <%= link_to '一覧へ戻る', boards_path %>
+  </div>
+</div>

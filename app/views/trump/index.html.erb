@@ -1,0 +1,9 @@
+<div class="flex items-center justify-center h-screen left-1/2 right-1/2 text-yellow-400">
+  <%= form_with url: start_game_path, method: :post do %>
+    <%= label_tag :coin, "何枚カケますか？" %>
+    <%= number_field_tag :coin, 1, min: 1, class: "text-black"%>枚
+    <div class="flex flex-col mt-8">
+      <%= submit_tag "ゲーム開始" %>
+    </div>
+  <% end %>
+</div>

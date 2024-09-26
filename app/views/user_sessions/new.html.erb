@@ -1,0 +1,17 @@
+<div class="flex items-center justify-center h-screen lg:fixed left-1/2 right-1/2">
+  <%= form_with url: login_path do |f| %>
+    <div class="mb-12">
+      <%= f.text_field :name, placeholder: 'ニックネーム', style: "width: 200px;", autocomplete: 'off' %>
+    </div>
+    <div class="mb-6">
+      <%= f.password_field :password, placeholder: 'パスワード', style: "width: 200px;", autocomplete: 'off' %>
+    </div>
+    <div class="flex justify-end mb-8">
+       <%= f.submit 'チェックイン', class: "text-yellow-400"%>
+    </div>
+    <div class="flex justify-start">
+      <%= link_to "会員登録はこちら", new_user_path, class: "text-yellow-400"%>
+    </div>
+  <% end %>
+  </div>
+</div>
