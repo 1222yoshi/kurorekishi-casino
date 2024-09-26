@@ -9,6 +9,10 @@ class BoardsController < ApplicationController
 
   def create
     @board = current_user.boards.build(board_params)
+    if current_user.boards.exists?(body: @board.body)
+      redirect_to new_board_path, danger: 'この黒歴史はすでに登録されています。'
+      return
+    end
     kurorekishi = board_params[:body]
     content = "これから黒歴史（人には言えない過去や恥ずかった瞬間）を送ります。\n"
     content += "「#{kurorekishi}」です。\n"
