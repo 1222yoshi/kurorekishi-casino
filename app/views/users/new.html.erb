@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center h-screen xl:fixed left-1/2 right-1/2">
   <%= form_with model: @user do |f| %>
     <div class="mb-6">
-      <%= f.text_field :name, placeholder: '名前', style: "width: 200px;", autocomplete: 'off' %>
+      <%= f.text_field :name, placeholder: 'ニックネーム', style: "width: 200px;", autocomplete: 'off' %>
     </div>
     <div class="mb-6">
       <%= f.password_field :password, placeholder: 'パスワード', style: "width: 200px;", autocomplete: 'off' %>
