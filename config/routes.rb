@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
-  get 'share', to: 'hone#share'
+  get 'share', to: 'home#share', as: :share_home
   scope 'trump' do
     get 'index', to: 'trump#index', as: :trump_index  # ゲームの最初の画面
     post 'start_game', to: 'trump#start_game' # ゲーム開始
