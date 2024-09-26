@@ -1,0 +1,9 @@
+<div class="flex justify-center">
+  <div class="flex flex-col mt-20">
+    <% if @skills.present? %>
+      <div class="mt-8 grid grid-cols-2">
+        <%= render @skills %>
+      </div>
+    <% end %>
+  </div>
+</div>

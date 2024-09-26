@@ -1,0 +1,40 @@
+<div class="flex flex-col bg-black m-4 text-center max-lg:text-sm justify-center rounded text-white">
+  <% if board.user == current_user || current_user.purchased_boards.include?(board) %> 
+    <%= link_to board_path(board) do %>
+      <% if current_user == board.user %>
+        <div class="text-emerald-700">
+          <%= board.user.name %>様
+        </div>
+      <% else %>
+        <div>
+          <%= board.user.name %>様
+        </div>
+      <% end %>
+      <div>
+        黒歴史の種類:<%= board.title %>
+      </div>
+      <div>
+        必要コイン:<%= board.price * 2%>枚
+      </div>
+    <% end %>
+  <% else %>
+    <div>
+      <%= board.user.name %>様
+    </div>
+    <div>
+      黒歴史の種類:<%= board.title %>
+    </div>
+    <div>
+      必要コイン:<%= board.price * 2%>枚
+    </div>
+  <% end %>
+  <% if board.user == current_user %>
+    <%= button_to "コイン#{board.price * 2}枚を消費して買い戻す（削除）", board_path(board), method: :delete, class: "text-red-600"%>
+  <% elsif current_user.purchased_boards.include?(board) %>
+    <div class="text-emerald-700">
+      交換済み
+    </div>
+  <%else%>
+    <%= link_to "コイン#{board.price * 2}枚を消費して購入", board_path(board), class: "text-red-600" %>
+  <% end %>
+</div>

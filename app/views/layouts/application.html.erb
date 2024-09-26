@@ -17,7 +17,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="bg-emerald-700">
+    <%= render 'shared/header' %>
+    <%= render 'shared/flash_message' %>
     <%= yield %>
   </body>
 </html>

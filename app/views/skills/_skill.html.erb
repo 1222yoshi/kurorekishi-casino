@@ -1,0 +1,44 @@
+<div class="flex flex-col bg-white m-4 text-center max-lg:text-sm justify-center <%= skill_type_class(skill.skill_type) %> rounded">
+  <div class="text-xl mb-auto max-lg:text-base">
+    <%= skill.name %>
+  </div>
+  <div class="max-lg:text-xs mt-2 mb-2">
+    <% if skill.skill_type == 3 && (!current_user || current_user.skills.where(skill_type: 1).empty?) %>
+      天使スキルを1つ以上購入で詳細解放
+    <% elsif skill.skill_type == 4 && (!current_user || current_user.skills.where(skill_type: 2).empty?) %>
+      悪魔スキルを1つ以上購入で詳細解放
+    <% elsif skill.skill_type == 5 && (!current_user || !(current_user.skills.where(skill_type: 1).exists? && current_user.skills.where(skill_type: 2).exists?)) %>
+      天使と悪魔のスキルをそれぞれ1つ以上購入で詳細解放
+    <% else %>
+      <%= skill.description %>
+    <% end %>
+  </div>
+  <div class="mt-auto">
+    必要コイン:<%= skill.price %>枚
+  </div>
+  <% if current_user && current_user.skills.include?(skill) %>
+    <% if current_user.equipped.include?(skill) %>
+      <div>
+        装備中
+      </div>
+    <% else %>
+      <div>
+        <%= link_to '装備する', buy_skill_path(skill), class: "text-emerald-700" %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-red-600">
+      <% if skill.skill_type == 3 && (!current_user || current_user.skills.where(skill_type: 1).count != 2) %>
+        天使スキルを2つ購入で解放
+      <% elsif skill.skill_type == 4 && (!current_user || current_user.skills.where(skill_type: 2).count != 2) %>
+        悪魔スキルを2つ購入で解放
+      <% elsif skill.skill_type == 5 && (!current_user || (current_user.skills.where(skill_type: 1).count + current_user.skills.where(skill_type: 2).count <= 2)) %>
+        天使と悪魔のスキルを合計3つ以上購入で解放
+      <% elsif skill.skill_type == 6 && (!current_user || (current_user.skills.count <= 5)) %>
+        全てのスキル購入で解放
+      <% else %>
+        <%= link_to "コイン#{skill.price}枚を消費して購入", buy_skill_path(skill), class: "text-red-600" %>
+      <% end %> 
+    </div>
+  <% end %>
+</div>
