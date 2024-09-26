@@ -1,0 +1,12 @@
+<footer class="fixed w-full bottom-0">
+  <div class="text-white bg-black flex items-center w-full justify-between">
+    <% if current_user %>
+      <div>
+      </div>
+      <div class="flex text-center max-lg:text-xs max-lg:mr-1 lg:mr-4 whitespace-nowrap">
+      スキル：<%=  current_user.equipped.map { |equipped_skill| equipped_skill.name }.join(', ') %>
+      | <%= current_user.coin %>枚
+      </div>
+    <% end%>
+  </div>
+</footer>

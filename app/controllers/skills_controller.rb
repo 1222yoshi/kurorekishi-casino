@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-  skip_before_action :require_login, only: %i[index buy]
+  skip_before_action :require_login, only: %i[index]
 
   def index
     @skills = Skill.all
