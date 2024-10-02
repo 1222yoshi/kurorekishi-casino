@@ -35,6 +35,6 @@
       交換済み
     </div>
   <%else%>
-    <%= link_to "コイン#{board.price * 2}枚を消費して購入", board_path(board), class: "text-red-600" %>
+    <%= link_to "コイン#{board.price * 2}枚を消費して購入", board_path(board), class: "text-red-600", method: :post %>
   <% end %>
 </div>
