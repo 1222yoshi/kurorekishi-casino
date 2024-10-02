@@ -23,7 +23,7 @@
       </div>
     <% else %>
       <div>
-        <%= link_to '装備する', buy_skill_path(skill), class: "text-emerald-700" %>
+        <%= link_to '装備する', buy_skill_path(skill), class: "text-emerald-700", method: :post %>
       </div>
     <% end %>
   <% else %>
@@ -37,7 +37,7 @@
       <% elsif skill.skill_type == 6 && (!current_user || (current_user.skills.count <= 5)) %>
         全てのスキル購入で解放
       <% else %>
-        <%= link_to "コイン#{skill.price}枚を消費して購入", buy_skill_path(skill), class: "text-red-600" %>
+        <%= link_to "コイン#{skill.price}枚を消費して購入", buy_skill_path(skill), class: "text-red-600", method: :post %>
       <% end %> 
     </div>
   <% end %>
